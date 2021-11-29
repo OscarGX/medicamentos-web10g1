@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 
@@ -22,6 +22,7 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
   AgmCoreModule
 } from '@agm/core'; */
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ApiPrefixInterceptor } from './common/interceptors/api-prefix.interceptor';
 
 @NgModule({
   imports: [
@@ -36,9 +37,10 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApiPrefixInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,146 @@
+<div class="main-content">
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Registro farmacias</h4>
+                        <p class="card-category">Registra tu farmacia para comenzar a vender tus medicamentos!</p>
+                    </div>
+                    <div class="card-body">
+                        <mat-stepper linear>
+                            <mat-step label="Datos de la farmacia" state="general" [stepControl]="form1">
+                                <form novalidate autocomplete="off" [formGroup]="form1">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Nombre" maxLength="40" type="text" formControlName="nombre">
+                                                <mat-error *ngIf="isNombreValid">{{ getErrorMessage('nombre', 1) }}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="RFC" type="text" maxLength="13" formControlName="rfc" #rfc (input)="rfc.value = rfc.value.toUpperCase()">
+                                                <mat-error *ngIf="isRfcValid">{{ getErrorMessage('rfc', 1) }}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Teléfono" type="tel" maxLength="10" formControlName="telefono">
+                                                <mat-error *ngIf="isTelefonoValid">{{ getErrorMessage('telefono', 1) }}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <textarea matInput placeholder="Descripción" maxLength="100" type="text" formControlName="descripcion" #desc></textarea>
+                                                <mat-error *ngIf="isDescripcionValid">{{ getErrorMessage('descripcion', 1) }}</mat-error>
+                                                <mat-hint align="end">{{desc.value?.length || 0}}/100</mat-hint>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button matStepperNext type="button" class="btn btn-primary" type="button" [disabled]="!form1.valid">Siguiente</button>
+                                </form>
+                            </mat-step>
+                            <mat-step label="Datos de contacto" state="contact" [stepControl]="form2">
+                                <form novalidate autocomplete="off" [formGroup]="form2">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <mat-form-field>
+                                                <mat-label>Estado</mat-label>
+                                                <mat-select formControlName="estadoId">
+                                                    <mat-option value="one">First option</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field>
+                                                <mat-label>Municipio</mat-label>
+                                                <mat-select formControlName="municipioId">
+                                                    <mat-option value="one">First option</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field>
+                                                <mat-label>Colonia</mat-label>
+                                                <mat-select formControlName="coloniaId">
+                                                    <mat-option value="one">First option</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Calle" maxLength="40" type="text" formControlName="calle">
+                                                <mat-error *ngIf="isCalleValid">{{ getErrorMessage('calle', 2) }}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Número Interior" maxLength="5" type="text" formControlName="numeroInterior">
+                                                <!-- <mat-error *ngIf="isCalleValid">{{ getErrorMessage('calle', 2) }}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Número Exterior" maxLength="5" type="text" formControlName="numeroExterior">
+                                                <!-- <mat-error *ngIf="isCalleValid">{{ getErrorMessage('calle', 2) }}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button matStepperNext class="btn btn-primary" type="button" [disabled]="!form2.valid">Siguiente</button>
+                                    <button mat-button matStepperPrevious type="button">Regresar</button>
+                                </form>
+                            </mat-step>
+                            <mat-step label="Datos del perfil" state="profile" [stepControl]="form3">
+                                <form novalidate autocomplete="off" [formGroup]="form3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Correo electrónico" maxLength="50" type="email" formControlName="correoElectronico">
+                                                <!-- <mat-error *ngIf="isCalleValid">{{ getErrorMessage('calle', 2) }}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Nombre de usuario" maxLength="30" type="text" formControlName="username">
+                                                <!-- <mat-error *ngIf="isCalleValid">{{ getErrorMessage('calle', 2) }}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Contraseña" maxLength="30" type="password" formControlName="contrasena">
+                                                <!-- <mat-error *ngIf="isCalleValid">{{ getErrorMessage('calle', 2) }}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Repetir contraseña" maxLength="30" type="password" formControlName="repeatPassword">
+                                                <!-- <mat-error *ngIf="isCalleValid">{{ getErrorMessage('calle', 2) }}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button class="btn btn-success" type="submit" [disabled]="!form3.valid">Registrar</button>
+                                    <button mat-button matStepperPrevious type="button">Regresar</button>
+                                </form>
+                            </mat-step>
+                            <!-- Icon overrides. -->
+                            <ng-template matStepperIcon="general">
+                                <mat-icon>description</mat-icon>
+                            </ng-template>
+                            <ng-template matStepperIcon="contact">
+                                <mat-icon>phone</mat-icon>
+                            </ng-template>
+                            <ng-template matStepperIcon="profile">
+                                <mat-icon>account_circle</mat-icon>
+                            </ng-template>
+                        </mat-stepper>
+                        <small><a routerLink="/auth/farmacias">Ya tengo una cuenta, iniciar sesión</a></small>
+                    </div>
+                    <!-- <div class="card-footer">
+                        <small><a routerLink="/auth/farmacias">Ya tengo una cuenta, iniciar sesión</a></small>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

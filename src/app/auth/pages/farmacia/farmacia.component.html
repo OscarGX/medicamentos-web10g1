@@ -1,0 +1,43 @@
+<div class="main-content">
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-md-center">
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <img class="img" src="./assets/img/login/profile-login.png" />
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">Farmacias</h6>
+                        <h4 class="card-title">Login</h4>
+                        <hr>
+                        <form novalidate autocomplete="off" [formGroup]="form" (ngSubmit)="login()">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nombre de usuario" [maxLength]="30" formControlName="username">
+                                        <mat-error *ngIf="isUsernameValid">{{ getErrorMessage('username') }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Contraseña" type="password" formControlName="password">
+                                        <mat-error *ngIf="isPasswordValid">{{ getErrorMessage('password') }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button class="btn btn-success" type="submit" [disabled]="!form.valid">Enviar</button>
+                        </form>
+                        <div class="row">
+                            <div class="col-md-12 text-left">
+                                <small><a routerLink="/auth/farmacia/registro">Registrarme</a></small>
+                            </div>
+                        </div>
+                        <!-- <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
